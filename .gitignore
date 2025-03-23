@@ -1,0 +1,34 @@
+# WordPress files
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/backups/
+
+# Ignore WordPress core files
+wp-admin/
+wp-includes/
+wp-*.php
+license.txt
+readme.html
+xmlrpc.php
+
+# Database backups
+*.sql
+*.sql.gz
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# System files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker
+.docker/
+.data/ 
+wp-content/themes/index.php

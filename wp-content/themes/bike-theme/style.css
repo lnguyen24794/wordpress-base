@@ -1,0 +1,57 @@
+/*
+Theme Name: Bike Theme
+Theme URI: https://example.com/bike-theme/
+Author: Your Name
+Author URI: https://example.com/
+Description: A modern WordPress theme for bike shops and enthusiasts.
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 6.0
+Requires PHP: 7.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: bike-theme
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/********** Template CSS **********/
+:root {
+    --primary: #D35400;
+    --secondary: #2C3E50;
+    --light: #F5F5F5;
+    --dark: #1E1E1E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: #666666;
+    font-weight: 400;
+    background: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: .5s;
+}
+
+a:hover {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+}
