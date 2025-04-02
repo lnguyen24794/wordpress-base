@@ -1,6 +1,6 @@
 /********** Template CSS **********/
 :root {
-    --primary: #FEA116;
+    --primary: #ebde34;
     --light: #F1F8FF;
     --dark: #0F172B;
 }
@@ -153,7 +153,7 @@
 }
 
 .page-header-inner {
-    background: rgba(15, 23, 43, .7);
+    background: rgba(15, 23, 43, .55);
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

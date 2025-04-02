@@ -109,7 +109,7 @@
                         ?>
                         <?php $premium_button_url = bike_theme_get_option('premium_button_url', '#'); ?>
                         <?php if ($premium_button_url) : ?>
-                            <a href="<?php echo esc_url($premium_button_url); ?>" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">
+                            <a href="/booking" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">
                                 <?php echo esc_html(bike_theme_get_option('premium_button_text', __('Booking Now', 'bike-theme'))); ?>
                                 <i class="fa fa-arrow-right ms-3"></i>
                             </a>

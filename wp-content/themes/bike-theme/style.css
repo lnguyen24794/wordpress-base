@@ -55,3 +55,15 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--dark);
     font-family: 'Montserrat', sans-serif;
 }
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
