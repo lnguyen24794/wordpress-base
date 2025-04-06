@@ -255,7 +255,7 @@ table.comments td.comment p a:after {
 }
 
 .akismet-card {
-	margin-top: 1rem;
+	margin-top: 1.11rem;
 	margin-bottom: 0;
 	position: relative;
 	box-sizing: border-box;
@@ -272,11 +272,11 @@ table.comments td.comment p a:after {
 
 .akismet-card .inside {
 	padding: 1.5rem;
-	padding-top: 1rem;
+	padding-top: 1.11rem;
 }
 
 .akismet-card .akismet-card-actions {
-	margin-top: 1rem;
+	margin-top: 1.11rem;
 }
 
 .jetpack_page_akismet-key-config .update-nag, .settings_page_akismet-key-config .update-nag {
@@ -311,7 +311,7 @@ table.comments td.comment p a:after {
 .akismet-jetpack-gravatar {
 	padding: 0 0 0 1.5rem;
 	float: left;
-	margin-right: 1rem;
+	margin-right: 1.11rem;
 	width: 54px;
 	height: 54px;
 }
@@ -418,7 +418,7 @@ table.comments td.comment p a:after {
 .akismet-section-header {
 	position: relative;
 	margin: 0 auto 0.625rem auto;
-	padding: 1rem;
+	padding: 1.11rem;
 	box-sizing: border-box;
 	box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
 	background: #ffffff;

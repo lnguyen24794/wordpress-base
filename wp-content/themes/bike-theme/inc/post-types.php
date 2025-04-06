@@ -166,34 +166,11 @@ function bike_theme_register_tour_post_type()
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array('slug' => 'bike-tour-category'),
+        'rewrite'           => array('slug' => 'tour-category'),
         'show_in_rest'      => true,
     );
 
     register_taxonomy('tour_category', array('bike_tour'), $tax_args);
-
-    // Đăng ký taxonomy Destination cho Bike Tour
-    register_taxonomy('tour_destination', 'bike_tour', array(
-        'labels' => array(
-            'name' => __('Destinations', 'bike-theme'),
-            'singular_name' => __('Destination', 'bike-theme'),
-            'search_items' => __('Search Destinations', 'bike-theme'),
-            'all_items' => __('All Destinations', 'bike-theme'),
-            'parent_item' => __('Parent Destination', 'bike-theme'),
-            'parent_item_colon' => __('Parent Destination:', 'bike-theme'),
-            'edit_item' => __('Edit Destination', 'bike-theme'),
-            'update_item' => __('Update Destination', 'bike-theme'),
-            'add_new_item' => __('Add New Destination', 'bike-theme'),
-            'new_item_name' => __('New Destination Name', 'bike-theme'),
-            'menu_name' => __('Destinations', 'bike-theme'),
-        ),
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'destination'),
-        'show_in_rest' => true,
-    ));
 }
 add_action('init', 'bike_theme_register_tour_post_type');
 

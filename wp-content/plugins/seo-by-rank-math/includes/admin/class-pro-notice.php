@@ -121,7 +121,7 @@ class Pro_Notice {
 				border-width: 3px;
 				border-style: solid;
 				border-color: #161e28;
-				padding: 0.25rem 1rem 1rem;
+				padding: 0.25rem 1.11rem 1.11rem;
 				border-radius: 5px;
 			}
 			#rank_math_pro_notice.is-dismissible p {

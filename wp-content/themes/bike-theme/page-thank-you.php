@@ -34,25 +34,18 @@ get_header();
                 <h1 class="mb-5"><?php esc_html_e('Your Booking Has Been Received', 'bike-theme'); ?></h1>
                 
                 <div class="row justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 text-left">
                         <div class="bg-light rounded p-5 mb-5">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <h5 class="mb-1"><?php esc_html_e('Booking Confirmed', 'bike-theme'); ?></h5>
-                                </div>
-                            </div>
+                            <h5 class="mb-3"><?php esc_html_e('Booking Confirmed', 'bike-theme'); ?></h5>
                             <p class="mb-4"><?php esc_html_e('Thank you for booking with us! We have received your booking request and will contact you shortly for confirmation.', 'bike-theme'); ?></p>
                             <p class="mb-4"><?php esc_html_e('A confirmation email has been sent to your email address with your booking details.', 'bike-theme'); ?></p>
                             
                             <h5 class="mb-3"><?php esc_html_e('What Happens Next?', 'bike-theme'); ?></h5>
-                            <ul class="mb-4">
-                                <li><?php esc_html_e('Our team will review your booking details.', 'bike-theme'); ?></li>
-                                <li><?php esc_html_e('We will contact you within 24 hours to confirm availability.', 'bike-theme'); ?></li>
-                                <li><?php esc_html_e('Payment instructions will be provided if not already completed.', 'bike-theme'); ?></li>
-                                <li><?php esc_html_e('You will receive a final confirmation once everything is set.', 'bike-theme'); ?></li>
+                            <ul class="mb-4 text-left">
+                                <li class="text-left"><?php esc_html_e('Our team will review your booking details.', 'bike-theme'); ?></li>
+                                <li class="text-left"><?php esc_html_e('We will contact you within 24 hours to confirm availability.', 'bike-theme'); ?></li>
+                                <li class="text-left"><?php esc_html_e('Payment instructions will be provided if not already completed.', 'bike-theme'); ?></li>
+                                <li class="text-left"><?php esc_html_e('You will receive a final confirmation once everything is set.', 'bike-theme'); ?></li>
                             </ul>
                             
                             <div class="text-center">

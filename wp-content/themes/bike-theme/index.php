@@ -29,75 +29,75 @@ get_header();
                     // Get all slides from options
                     $slides = get_option('bike_theme_slides', array());
 
-        // If no slides found, create a default one
-        if (empty($slides)) {
-            $slides[] = array(
-                'image_id' => 0,
-                'image_url' => get_template_directory_uri() . '/assets/images/bikes/hero-1.jpg',
-                'subtitle' => __('Vietnam Cycling Tours', 'bike-theme'),
-                'title' => __('Discover Vietnam on Two Wheels', 'bike-theme'),
-                'btn1_text' => __('View Tours', 'bike-theme'),
-                'btn1_url' => get_post_type_archive_link('bike_tour'),
-                'btn2_text' => __('Book Now', 'bike-theme'),
-                'btn2_url' => get_permalink(get_option('bike_theme_booking_page')),
-                'active' => 1
-            );
-        }
+                    // If no slides found, create a default one
+                    if (empty($slides)) {
+                        $slides[] = array(
+                            'image_id' => 0,
+                            'image_url' => get_template_directory_uri() . '/assets/images/bikes/hero-1.jpg',
+                            'subtitle' => __('Vietnam Cycling Tours', 'bike-theme'),
+                            'title' => __('Discover Vietnam on Two Wheels', 'bike-theme'),
+                            'btn1_text' => __('View Tours', 'bike-theme'),
+                            'btn1_url' => get_post_type_archive_link('bike_tour'),
+                            'btn2_text' => __('Book Now', 'bike-theme'),
+                            'btn2_url' => get_permalink(get_option('bike_theme_booking_page')),
+                            'active' => 1
+                        );
+                    }
 
-        $active_slides = 0;
-        $found_active = false;
+                    $active_slides = 0;
+                    $found_active = false;
 
-        foreach ($slides as $index => $slide) :
-            // Skip inactive slides
-            if (empty($slide['active'])) {
-                continue;
-            }
+                    foreach ($slides as $index => $slide) :
+                        // Skip inactive slides
+                        if (empty($slide['active'])) {
+                            continue;
+                        }
 
-            $active_slides++;
+                        $active_slides++;
 
-            // Set image URL (use default if empty)
-            $image_url = !empty($slide['image_url']) ? $slide['image_url'] : get_template_directory_uri() . '/assets/images/bikes/hero-' . ($index % 3 + 1) . '.jpg';
+                        // Set image URL (use default if empty)
+                        $image_url = !empty($slide['image_url']) ? $slide['image_url'] : get_template_directory_uri() . '/assets/images/bikes/hero-' . ($index % 3 + 1) . '.jpg';
 
-            // Get text values with defaults
-            $subtitle = !empty($slide['subtitle']) ? $slide['subtitle'] : '';
-            $title = !empty($slide['title']) ? $slide['title'] : '';
-            $btn1_text = !empty($slide['btn1_text']) ? $slide['btn1_text'] : '';
-            $btn1_url = !empty($slide['btn1_url']) ? $slide['btn1_url'] : '';
-            $btn2_text = !empty($slide['btn2_text']) ? $slide['btn2_text'] : '';
-            $btn2_url = !empty($slide['btn2_url']) ? $slide['btn2_url'] : '';
+                        // Get text values with defaults
+                        $subtitle = !empty($slide['subtitle']) ? $slide['subtitle'] : '';
+                        $title = !empty($slide['title']) ? $slide['title'] : '';
+                        $btn1_text = !empty($slide['btn1_text']) ? $slide['btn1_text'] : '';
+                        $btn1_url = !empty($slide['btn1_url']) ? $slide['btn1_url'] : '';
+                        $btn2_text = !empty($slide['btn2_text']) ? $slide['btn2_text'] : '';
+                        $btn2_url = !empty($slide['btn2_url']) ? $slide['btn2_url'] : '';
 
-            // Set first active slide as active
-            $is_active = false;
-            if (!$found_active) {
-                $is_active = true;
-                $found_active = true;
-            }
-            ?>
-                    <div class="carousel-item <?php echo $is_active ? 'active' : ''; ?>">
-                        <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <?php if (!empty($subtitle)) : ?>
-                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown"><?php echo esc_html($subtitle); ?></h6>
-                                <?php endif; ?>
-                                <?php if (!empty($title)) : ?>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown"><?php echo esc_html($title); ?></h1>
-                                <?php endif; ?>
-                                <?php if (!empty($btn1_text)) : ?>
-                                <a href="<?php echo esc_url($btn1_url); ?>" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"><?php echo esc_html($btn1_text); ?></a>
-                                <?php endif; ?>
-                                <?php if (!empty($btn2_text)) : ?>
-                                <a href="<?php echo esc_url($btn2_url); ?>" class="btn btn-light py-md-3 px-md-5 animated slideInRight"><?php echo esc_html($btn2_text); ?></a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-        endforeach;
+                        // Set first active slide as active
+                        $is_active = false;
+                        if (!$found_active) {
+                            $is_active = true;
+                            $found_active = true;
+                        }
+                        ?>
+                                <div class="carousel-item <?php echo $is_active ? 'active' : ''; ?>">
+                                    <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+                                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                        <div class="p-3" style="max-width: 700px;">
+                                            <?php if (!empty($subtitle)) : ?>
+                                            <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown"><?php echo esc_html($subtitle); ?></h6>
+                                            <?php endif; ?>
+                                            <?php if (!empty($title)) : ?>
+                                            <h1 class="display-3 text-white mb-4 animated slideInDown"><?php echo esc_html($title); ?></h1>
+                                            <?php endif; ?>
+                                            <?php if (!empty($btn1_text)) : ?>
+                                            <a href="<?php echo esc_url($btn1_url); ?>" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"><?php echo esc_html($btn1_text); ?></a>
+                                            <?php endif; ?>
+                                            <?php if (!empty($btn2_text)) : ?>
+                                            <a href="<?php echo esc_url($btn2_url); ?>" class="btn btn-light py-md-3 px-md-5 animated slideInRight"><?php echo esc_html($btn2_text); ?></a>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                    endforeach;
 
-        // If no active slides were found, display a default slide
-        if ($active_slides == 0) :
-            ?>
+                     // If no active slides were found, display a default slide
+                    if ($active_slides == 0) :
+                    ?>
                     <div class="carousel-item active">
                         <img class="w-100" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/hero-1.jpg" alt="<?php esc_attr_e('Cycling Tour in Vietnam', 'bike-theme'); ?>">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -135,14 +135,14 @@ get_header();
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase"><?php esc_html_e('About Us', 'bike-theme'); ?></h6>
-                        <h1 class="mb-4"><?php echo wp_kses_post(__('Welcome to <span class="text-primary text-uppercase">VietCycle Tours</span>', 'bike-theme')); ?></h1>
+                        <h1 class="mb-4"><?php echo wp_kses_post(__('Welcome to <span class="text-primary ">BeeBikeHub</span>', 'bike-theme')); ?></h1>
                         <p class="mb-4"><?php esc_html_e('We provide high-quality bicycle tours and rentals throughout Vietnam. With over 10 years of experience, we are proud to be pioneers in eco-friendly cycling tourism, exploring Vietnamese culture and nature.', 'bike-theme'); ?></p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-bicycle fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">150</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">20</h2>
                                         <p class="mb-0"><?php esc_html_e('Bicycles', 'bike-theme'); ?></p>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@ get_header();
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-map-marked-alt fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">50</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up"><?php echo wp_count_posts('bike_tour')->publish; ?></h2>
                                         <p class="mb-0"><?php esc_html_e('Tours', 'bike-theme'); ?></p>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@ get_header();
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1500</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">100</h2>
                                         <p class="mb-0"><?php esc_html_e('Customers', 'bike-theme'); ?></p>
                                     </div>
                                 </div>
@@ -170,18 +170,85 @@ get_header();
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/about-1.jpg" style="margin-top: 25%;">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/about-2.jpg">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/about-3.jpg">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/about-4.jpg">
-                            </div>
+                            <?php
+                            // Get all about slides from options
+                            $about_slides = get_option('bike_theme_about_slides', array());
+
+                            // If no slides found, create default ones
+                            if (empty($about_slides)) {
+                                $about_slides = array(
+                                    array(
+                                        'image_id' => 0,
+                                        'image_url' => get_template_directory_uri() . '/assets/images/bikes/about-1.jpg',
+                                        'active' => 1
+                                    ),
+                                    array(
+                                        'image_id' => 0,
+                                        'image_url' => get_template_directory_uri() . '/assets/images/bikes/about-2.jpg',
+                                        'active' => 1
+                                    ),
+                                    array(
+                                        'image_id' => 0,
+                                        'image_url' => get_template_directory_uri() . '/assets/images/bikes/about-3.jpg',
+                                        'active' => 1
+                                    ),
+                                    array(
+                                        'image_id' => 0,
+                                        'image_url' => get_template_directory_uri() . '/assets/images/bikes/about-4.jpg',
+                                        'active' => 1
+                                    )
+                                );
+                            }
+
+                            $active_slides = 0;
+                            $positions = array(
+                                array('text-end', 'w-75', '25%', '0.1s'),
+                                array('text-start', 'w-100', '0', '0.3s'),
+                                array('text-end', 'w-50', '0', '0.5s'),
+                                array('text-start', 'w-75', '0', '0.7s')
+                            );
+
+                            foreach ($about_slides as $index => $slide) :
+                                // Skip inactive slides
+                                if (empty($slide['active']) || $active_slides >= 4) {
+                                    continue;
+                                }
+
+                                // Set image URL (use default if empty)
+                                $image_url = !empty($slide['image_url']) ? $slide['image_url'] : get_template_directory_uri() . '/assets/images/bikes/about-' . ($index + 1) . '.jpg';
+                                
+                                // Get position settings
+                                $position = $positions[$active_slides];
+                            ?>
+                                <div class="col-6 <?php echo $position[0]; ?>">
+                                    <img class="img-fluid rounded <?php echo $position[1]; ?> wow zoomIn" 
+                                        data-wow-delay="<?php echo $position[3]; ?>" 
+                                        src="<?php echo esc_url($image_url); ?>" 
+                                        <?php if ($position[2] !== '0') : ?>
+                                        style="margin-top: <?php echo $position[2]; ?>"
+                                        <?php endif; ?>>
+                                </div>
+                            <?php
+                                $active_slides++;
+                            endforeach;
+
+                            // If no active slides were found, display defaults
+                            if ($active_slides == 0) :
+                                foreach ($positions as $index => $position) :
+                                    $default_image = get_template_directory_uri() . '/assets/images/bikes/about-' . ($index + 1) . '.jpg';
+                                ?>
+                                    <div class="col-6 <?php echo $position[0]; ?>">
+                                        <img class="img-fluid rounded <?php echo $position[1]; ?> wow zoomIn" 
+                                            data-wow-delay="<?php echo $position[3]; ?>" 
+                                            src="<?php echo esc_url($default_image); ?>"
+                                            <?php if ($position[2] !== '0') : ?>
+                                            style="margin-top: <?php echo $position[2]; ?>"
+                                            <?php endif; ?>>
+                                    </div>
+                                <?php
+                                endforeach;
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -189,276 +256,104 @@ get_header();
         </div>
         <!-- About End -->
 
-        <!-- Featured Bikes Start -->
+        <!-- Destinations Start -->
         <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title text-center text-primary text-uppercase"><?php esc_html_e('Explore Destinations', 'bike-theme'); ?></h6>
+                    <h1 class="mb-5"><?php esc_html_e('Popular Cycling Destinations', 'bike-theme'); ?></h1>
+                </div>
+                <div class="row g-4">
+                    <?php
+                    // Get all destinations
+                    $destinations = get_terms(array(
+                        'taxonomy' => 'destination',
+                        'hide_empty' => true,
+                        'parent' => 0, // Get only top-level destinations
+                        'orderby' => 'name',
+                        'order' => 'ASC',
+                        'number' => 6 // Limit to 6 destinations
+                    ));
+
+                    if (!empty($destinations) && !is_wp_error($destinations)) :
+                        foreach ($destinations as $destination) :
+                            // Get destination image
+                                        $image_id = get_term_meta($destination->term_id, 'destination_image', true);
+                                        $image_url = wp_get_attachment_url($image_id);
+                                        if (!$image_url) {
+                                            $image_url = get_template_directory_uri() . '/assets/images/bikes/destination-default.jpg';
+                                        }
+
+                    // Get tours count
+                    $tours_count = $destination->count;
+                    ?>
+                    <!-- Tour Banner Start -->
+                    <div class="container-xxl py-0 px-0 wow zoomIn" data-wow-delay="0.1s">
+                        <div class="row g-0">
+                            <div class="col-md-6 bg-dark d-flex align-items-center">
+                                <div class="p-5">
+                                    <h6 class="section-title text-start text-white text-uppercase mb-3"><?php esc_html_e('Featured Destination', 'bike-theme'); ?></h6>
+                                    <h1 class="text-white mb-4"><?php echo esc_html($destination->name); ?></h1>
+                                    <p class="text-white mb-4"><?php echo wp_trim_words($destination->description, 20, '...'); ?></p>
+                                    <div class="row g-1 mb-4">
+                                        <?php 
+                                        // Get category counts for this destination
+                                        $category_counts = bike_theme_count_tours_by_category_in_destination($destination->term_id);
+                                        
+                                        if (!empty($category_counts)) {
+                                            $count = 0;
+                                            foreach ($category_counts as $cat_id => $data) {
+                                                if ($count >= 4) break; // Display maximum 4 categories
+                                                $category = $data['category'];
+                                                $cat_count = $data['count'];
+                                                ?>
+                                                <div class="col-6 mb-2">
+                                                    <div class="bg-primary p-3">
+                                                        <h2 class="text-white mb-0"><?php echo esc_html($cat_count); ?></h2>
+                                                        <p class="text-white mb-0"><?php echo esc_html($category->name); ?></p>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                $count++;
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                    <a href="<?php echo esc_url(get_term_link($destination)); ?>" class="btn btn-primary py-md-3 px-md-5 me-3"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
+                                    <a href="/booking" class="btn btn-light py-md-3 px-md-5"><?php esc_html_e('Book Now', 'bike-theme'); ?></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="video position-relative">
+                                    <img class="img-fluid w-100 h-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $destination->name; ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tour Banner End -->
+                    <?php
+                    endforeach;
+                    endif;
+                    ?>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('bike_tour')); ?>" class="btn btn-primary py-3 px-5"><?php esc_html_e('View All Destinations', 'bike-theme'); ?></a>
+                </div>
+            </div>
+        </div>
+        <!-- Destinations End -->
+
+         <!-- Featured Bikes Start -->
+         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="section-title text-center text-primary text-uppercase"><?php esc_html_e('Our Bikes', 'bike-theme'); ?></h6>
                     <h1 class="mb-5"><?php echo wp_kses_post(__('Explore Our <span class="text-primary text-uppercase">Bikes</span>', 'bike-theme')); ?></h1>
                 </div>
-                <div class="row g-4">
-                    <?php
-                        $args = array(
-                            'post_type' => 'bike',
-                            'posts_per_page' => 3,
-                            'meta_query' => array(
-                                array(
-                                    'key' => 'bike_featured',
-                                    'value' => '1',
-                                    'compare' => '='
-                                )
-                            )
-                        );
-
-        $bikes_query = new WP_Query($args);
-
-        if ($bikes_query->have_posts()) :
-            while ($bikes_query->have_posts()) : $bikes_query->the_post();
-                $bike_price = get_post_meta(get_the_ID(), 'bike_price', true);
-                $bike_brand = get_post_meta(get_the_ID(), 'bike_brand', true);
-                $bike_type = get_post_meta(get_the_ID(), 'bike_type', true);
-                ?>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="room-item shadow rounded">
-                                    <div class="position-relative">
-                                        <?php if (has_post_thumbnail()) : ?>
-                                            <?php the_post_thumbnail('large', array('class' => 'img-fluid')); ?>
-                                        <?php else : ?>
-                                            <img class="img-fluid" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/bike-default.jpg" alt="<?php the_title_attribute(); ?>">
-                                        <?php endif; ?>
-                                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">
-                                            <?php echo esc_html(number_format($bike_price, 2, ',', '.')); ?> $<?php echo ($bike_price > 0) ? '/day' : ''; ?>
-                                        </small>
-                                    </div>
-                                    <div class="p-4 mt-2">
-                                        <div class="bikes-item mb-2">
-                                            <h5 class="mb-0"><?php the_title(); ?></h5>
-                                            <div class="ps-2">
-                                                <?php
-                                                $rating = get_post_meta(get_the_ID(), 'bike_rating', true);
-                                                $rating = $rating ? $rating : 5;
-                                                for ($i = 0; $i < 5; $i++) {
-                                                    if ($i < $rating) {
-                                                        echo '<small class="fa fa-star text-primary"></small>';
-                                                    } else {
-                                                        echo '<small class="fa fa-star text-secondary"></small>';
-                                                    }
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex mb-3">
-                                            <?php if ($bike_brand) : ?>
-                                            <small class="border-end me-3 pe-3"><i class="fa fa-tag text-primary me-2"></i><?php echo esc_html($bike_brand); ?></small>
-                                            <?php endif; ?>
-                                            <?php if ($bike_type) : ?>
-                                            <small><i class="fa fa-bicycle text-primary me-2"></i><?php echo esc_html($bike_type); ?></small>
-                                            <?php endif; ?>
-                                        </div>
-                                        <p class="text-body mb-3"><?php echo wp_trim_words(get_the_content(), 20, '...'); ?></p>
-                                        <div class="d-flex justify-content-between">
-                                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="<?php the_permalink(); ?>"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="/booking"><?php esc_html_e('Book Now', 'bike-theme'); ?></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                            <?php
-                                    endwhile;
-                        wp_reset_postdata();
-                        else :
-                            ?>
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="room-item shadow rounded ">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/bike-1.jpg" alt="<?php esc_attr_e('Road Bike', 'bike-theme'); ?>">
-                                    <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4"> 12$/day</small>
-                                </div>
-                                <div class="p-4 mt-2">
-                                    <div class="bikes-item mb-2">
-                                        <h5 class="mb-0"><?php esc_html_e('Specialized Tarmac SL7', 'bike-theme'); ?></h5>
-                                        <div class="ps-2">
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                            <small class="fa fa-star text-primary"></small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mb-3">
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-tag text-primary me-2"></i>Specialized</small>
-                                        <small><i class="fa fa-bicycle text-primary me-2"></i><?php esc_html_e('Road Bike', 'bike-theme'); ?></small>
-                                    </div>
-                                    <p class="text-body mb-3"><?php esc_html_e('Premium road bike with lightweight carbon frame, excellent speed, and modern aerodynamic design.', 'bike-theme'); ?></p>
-                                    <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="#"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="/contact"><?php esc_html_e('Contact Now', 'bike-theme'); ?></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div class="text-center mt-5">
-                    <a href="<?php echo esc_url(get_post_type_archive_link('bike')); ?>" class="btn btn-primary py-3 px-5"><?php esc_html_e('View All Bikes', 'bike-theme'); ?></a>
-                </div>
+                <?php include(get_template_directory() . '/template-parts/bikes.php'); ?>
             </div>
         </div>
         <!-- Featured Bikes End -->
-
-        <!-- Popular Tours Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title text-center text-primary text-uppercase"><?php esc_html_e('Discover Vietnam', 'bike-theme'); ?></h6>
-                    <h1 class="mb-5"><?php esc_html_e('Popular Bike Tours', 'bike-theme'); ?></h1>
-                </div>
-                <div class="row g-4 justify-content-start">
-                    <?php
-                    // Get bike tours
-                    $tour_args = array(
-                        'post_type' => 'bike_tour',
-                        'posts_per_page' => 3,
-                        'orderby' => 'meta_value_num',
-                        'meta_key' => '_tour_price',
-                        'order' => 'DESC',
-                    );
-                    $tour_query = new WP_Query($tour_args);
-
-                    if ($tour_query->have_posts()) :
-                        while ($tour_query->have_posts()) : $tour_query->the_post();
-                            $duration = get_post_meta(get_the_ID(), '_tour_duration', true);
-                            $distance = get_post_meta(get_the_ID(), '_tour_distance', true);
-                            $difficulty = get_post_meta(get_the_ID(), '_tour_difficulty', true);
-                            $price = bike_theme_get_tour_price(get_the_ID());
-                            $flexible_pricing = get_post_meta(get_the_ID(), '_tour_flexible_pricing_enabled', true) === '1';
-                    ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="tour-item shadow rounded ">
-                            <div class="position-relative ">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('large', array('class' => 'img-fluid')); ?>
-                                    </a>
-                                <?php else : ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <img class="img-fluid" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/placeholder-tour.jpg" alt="<?php the_title_attribute(); ?>">
-                                    </a>
-                                <?php endif; ?>
-                                <div class="tour-overlay p-4">
-                                    <span class="tour-price"><?php echo esc_html(number_format($price, 0, ',', '.')); ?> $
-                                        <?php if ($flexible_pricing) : ?>
-                                            <small><?php esc_html_e('from', 'bike-theme'); ?></small>
-                                        <?php endif; ?>
-                                    </span>
-                                    <div class="tour-meta">
-                                        <?php if ($difficulty) : ?>
-                                        <span><i class="fa fa-chart-line me-2"></i><?php echo esc_html($difficulty); ?></span>
-                                        <?php endif; ?>
-                                        <?php if ($duration) : ?>
-                                        <span><i class="fa fa-clock me-2"></i><?php echo esc_html($duration); ?></span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4 mt-2">
-                                <div class="bikes-item mb-2">
-                                    <h5 class="mb-0"><a href="<?php the_permalink(); ?>" class="text-dark"><?php the_title(); ?></a></h5>
-                                </div>
-                                <div class="d-flex mb-3">
-                                    <?php if ($distance) : ?>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-road text-primary me-2"></i><?php echo esc_html($distance); ?></small>
-                                    <?php endif; ?>
-                                    <?php 
-                                    $categories = get_the_terms(get_the_ID(), 'tour_category');
-                                    if ($categories && !is_wp_error($categories)) : 
-                                        $category = reset($categories); // Get first category
-                                    ?>
-                                    <small><i class="fa fa-tag text-primary me-2"></i><?php echo esc_html($category->name); ?></small>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="<?php the_permalink(); ?>"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="<?php the_permalink(); ?>#book-now"><?php esc_html_e('Book Now', 'bike-theme'); ?></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    else :
-                        // Display default tours if none are found
-                        $default_tours = array(
-                            array(
-                                'title' => 'Hanoi Old Quarter Tour',
-                                'duration' => '3 hours',
-                                'distance' => '10 km',
-                                'difficulty' => 'Easy',
-                                'price' => '350,000',
-                                'image' => 'placeholder-tour.jpg',
-                                'category' => 'City Tour'
-                            ),
-                            array(
-                                'title' => 'Countryside Adventure',
-                                'duration' => '5 hours',
-                                'distance' => '25 km',
-                                'difficulty' => 'Moderate',
-                                'price' => '550,000',
-                                'image' => 'placeholder-tour.jpg',
-                                'category' => 'Adventure'
-                            ),
-                            array(
-                                'title' => 'Food Tour By Bike',
-                                'duration' => '4 hours',
-                                'distance' => '15 km',
-                                'difficulty' => 'Easy',
-                                'price' => '450,000',
-                                'image' => 'placeholder-tour.jpg',
-                                'category' => 'Food Tour'
-                            )
-                        );
-
-                        foreach ($default_tours as $tour) :
-                    ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="tour-item shadow rounded ">
-                            <div class="position-relative ">
-                                <img class="img-fluid" src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/' . $tour['image']); ?>" alt="<?php echo esc_attr($tour['title']); ?>">
-                                <div class="tour-overlay p-4">
-                                    <span class="tour-price"><?php echo esc_html($tour['price']); ?> $</span>
-                                    <div class="tour-meta">
-                                        <span><i class="fa fa-chart-line me-2"></i><?php echo esc_html($tour['difficulty']); ?></span>
-                                        <span><i class="fa fa-clock me-2"></i><?php echo esc_html($tour['duration']); ?></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4 mt-2">
-                                <div class="bikes-item mb-2">
-                                    <h5 class="mb-0"><?php echo esc_html($tour['title']); ?></h5>
-                                </div>
-                                <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-road text-primary me-2"></i><?php echo esc_html($tour['distance']); ?></small>
-                                    <small><i class="fa fa-tag text-primary me-2"></i><?php echo esc_html($tour['category']); ?></small>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="#"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="#"><?php esc_html_e('Book Now', 'bike-theme'); ?></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                        endforeach;
-                    endif;
-                    ?>
-                </div>
-                <div class="text-center mt-5">
-                    <a href="<?php echo esc_url(get_post_type_archive_link('bike_tour')); ?>" class="btn btn-primary py-3 px-5"><?php esc_html_e('View All Tours', 'bike-theme'); ?></a>
-                </div>
-            </div>
-        </div>
-        <!-- Popular Tours End -->
 
         <!-- Service Start -->
         <div class="container-xxl py-5">
@@ -543,49 +438,7 @@ get_header();
         
         <!-- Testimonial End -->
 
-        <!-- Tour Banner Start -->
-        <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
-            <div class="row g-0">
-                <div class="col-md-6 bg-dark d-flex align-items-center">
-                    <div class="p-5">
-                        <h6 class="section-title text-start text-white text-uppercase mb-3"><?php esc_html_e('Featured Tour', 'bike-theme'); ?></h6>
-                        <h1 class="text-white mb-4"><?php esc_html_e('Sapa - Mai Chau Cycling Tour 5 Days', 'bike-theme'); ?></h1>
-                        <p class="text-white mb-4"><?php esc_html_e('A 5-day journey through the most beautiful mountain passes in Northern Vietnam. Explore villages, rice terraces, and the unique culture of ethnic minorities.', 'bike-theme'); ?></p>
-                        <div class="row g-1 mb-4">
-                            <div class="col-4">
-                                <div class="bg-primary p-3">
-                                    <h1 class="text-white mb-0">5</h1>
-                                    <p class="text-white mb-0"><?php esc_html_e('Days', 'bike-theme'); ?></p>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="bg-primary p-3">
-                                    <h1 class="text-white mb-0">4</h1>
-                                    <p class="text-white mb-0"><?php esc_html_e('Nights', 'bike-theme'); ?></p>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="bg-primary p-3">
-                                    <h1 class="text-white mb-0">160</h1>
-                                    <p class="text-white mb-0">km</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?php echo esc_url(home_url('/tour/sapa-maichau')); ?>" class="btn btn-primary py-md-3 px-md-5 me-3"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                        <a href="<?php echo esc_url(get_permalink(get_option('bike_theme_booking_page'))); ?>" class="btn btn-light py-md-3 px-md-5"><?php esc_html_e('Book Now', 'bike-theme'); ?></a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="video position-relative">
-                        <img class="img-fluid w-100" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bikes/tour-banner.jpg" alt="<?php esc_attr_e('Sapa Bike Tour', 'bike-theme'); ?>">
-                        <button type="button" class="btn-play position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#videoModal">
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Tour Banner End -->
+        
 
         <!-- Video Modal Start -->
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -629,3 +482,4 @@ get_header();
 <?php
 get_footer();
 ?>
+

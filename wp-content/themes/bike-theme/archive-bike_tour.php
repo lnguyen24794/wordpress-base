@@ -29,232 +29,194 @@ get_header();
 
     <!-- Tours Start -->
     <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title text-center text-primary text-uppercase"><?php esc_html_e('Explore Vietnam', 'bike-theme'); ?></h6>
-                <h1 class="mb-5"><?php echo wp_kses_post(__('Discover Our <span class="text-primary text-uppercase">Cycling Tours</span>', 'bike-theme')); ?></h1>
-            </div>
-
-            <!-- Tour Filter Start -->
-            <div class="mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                <form action="<?php echo esc_url(home_url('/')); ?>" method="get" class="tour-filter">
-                    <input type="hidden" name="post_type" value="bike_tour">
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="filter-difficulty" name="difficulty">
-                                    <option value=""><?php esc_html_e('Any Difficulty', 'bike-theme'); ?></option>
-                                    <option value="easy" <?php selected(isset($_GET['difficulty']) && $_GET['difficulty'] == 'easy'); ?>><?php esc_html_e('Easy', 'bike-theme'); ?></option>
-                                    <option value="moderate" <?php selected(isset($_GET['difficulty']) && $_GET['difficulty'] == 'moderate'); ?>><?php esc_html_e('Moderate', 'bike-theme'); ?></option>
-                                    <option value="difficult" <?php selected(isset($_GET['difficulty']) && $_GET['difficulty'] == 'difficult'); ?>><?php esc_html_e('Difficult', 'bike-theme'); ?></option>
-                                </select>
-                                <label for="filter-difficulty"><?php esc_html_e('Difficulty', 'bike-theme'); ?></label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="filter-duration" name="duration">
-                                    <option value=""><?php esc_html_e('Any Duration', 'bike-theme'); ?></option>
-                                    <option value="1-3" <?php selected(isset($_GET['duration']) && $_GET['duration'] == '1-3'); ?>><?php esc_html_e('1-3 Days', 'bike-theme'); ?></option>
-                                    <option value="4-7" <?php selected(isset($_GET['duration']) && $_GET['duration'] == '4-7'); ?>><?php esc_html_e('4-7 Days', 'bike-theme'); ?></option>
-                                    <option value="8+" <?php selected(isset($_GET['duration']) && $_GET['duration'] == '8+'); ?>><?php esc_html_e('8+ Days', 'bike-theme'); ?></option>
-                                </select>
-                                <label for="filter-duration"><?php esc_html_e('Duration', 'bike-theme'); ?></label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-floating">
-                                <?php
-                                $categories = get_terms(array(
-                                    'taxonomy' => 'tour_category',
-                                    'hide_empty' => false,
-                                ));
-?>
-                                <select class="form-select" id="filter-category" name="tour_category">
-                                    <option value=""><?php esc_html_e('Any Category', 'bike-theme'); ?></option>
-                                    <?php foreach ($categories as $category) : ?>
-                                        <option value="<?php echo esc_attr($category->slug); ?>" <?php selected(isset($_GET['tour_category']) && $_GET['tour_category'] == $category->slug); ?>><?php echo esc_html($category->name); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <label for="filter-category"><?php esc_html_e('Category', 'bike-theme'); ?></label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-primary w-100 py-3" type="submit"><?php esc_html_e('Filter Bike Tours', 'bike-theme'); ?></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- Tour Filter End -->
-
-            <div class="row g-4 justify-content-start">
+            <!-- Destinations Grid Start -->
+            <div class="row g-4">
                 <?php
-                // Set up custom query with filters
-                $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-                $args = array(
-                    'post_type' => 'bike_tour',
-                    'posts_per_page' => 9,
-                    'paged' => $paged,
-                );
+                // Get all destinations
+                $destinations = get_terms(array(
+                    'taxonomy' => 'destination',
+                    'hide_empty' => true,
+                    'parent' => 0,
+                    'orderby' => 'name',
+                    'order' => 'ASC'
+                ));
 
-                // Add meta query if filters are active
-                $meta_query = array();
+                if (!empty($destinations) && !is_wp_error($destinations)) :
+                    foreach ($destinations as $destination) :
+                        // Get destination image
+                        $image_id = get_term_meta($destination->term_id, 'destination_image', true);
+                        $image_url = wp_get_attachment_url($image_id);
+                        if (!$image_url) {
+                            $image_url = get_template_directory_uri() . '/assets/images/bikes/destination-default.jpg';
+                        }
 
-                // Duration filter
-                if (isset($_GET['duration']) && !empty($_GET['duration'])) {
-                    switch ($_GET['duration']) {
-                        case '1-3':
-                            $meta_query[] = array(
-                                'key' => '_tour_duration',
-                                'value' => array(1, 3),
-                                'type' => 'numeric',
-                                'compare' => 'BETWEEN'
-                            );
-                            break;
-                        case '4-7':
-                            $meta_query[] = array(
-                                'key' => '_tour_duration',
-                                'value' => array(4, 7),
-                                'type' => 'numeric',
-                                'compare' => 'BETWEEN'
-                            );
-                            break;
-                        case '8+':
-                            $meta_query[] = array(
-                                'key' => '_tour_duration',
-                                'value' => 8,
-                                'type' => 'numeric',
-                                'compare' => '>='
-                            );
-                            break;
-                    }
-                }
+                        // Get tours count
+                        $tours_count = $destination->count;
 
-                // Difficulty filter
-                if (isset($_GET['difficulty']) && !empty($_GET['difficulty'])) {
-                    $meta_query[] = array(
-                        'key' => '_tour_difficulty',
-                        'value' => sanitize_text_field($_GET['difficulty']),
-                        'compare' => '='
-                    );
-                }
-
-                if (!empty($meta_query)) {
-                    $args['meta_query'] = $meta_query;
-                }
-
-                // Category filter
-                if (isset($_GET['tour_category']) && !empty($_GET['tour_category'])) {
-                    $args['tax_query'] = array(
-                        array(
-                            'taxonomy' => 'tour_category',
-                            'field' => 'slug',
-                            'terms' => sanitize_text_field($_GET['tour_category']),
-                        ),
-                    );
-                }
-
-                $tour_query = new WP_Query($args);
-
-            if ($tour_query->have_posts()) :
-                while ($tour_query->have_posts()) : $tour_query->the_post();
-                    $duration = get_post_meta(get_the_ID(), '_tour_duration', true);
-                    $distance = get_post_meta(get_the_ID(), '_tour_distance', true);
-                    $difficulty = get_post_meta(get_the_ID(), '_tour_difficulty', true);
-                    $price = bike_theme_get_tour_price(get_the_ID());
-                    $flexible_pricing = get_post_meta(get_the_ID(), '_tour_flexible_pricing_enabled', true) === '1';
+                        // Get category counts for this destination
+                        $category_counts = bike_theme_count_tours_by_category_in_destination($destination->term_id);
                 ?>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="tour-item shadow rounded">
-                        <div class="position-relative">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('large', array('class' => 'img-fluid')); ?>
-                                </a>
-                            <?php else : ?>
-                                <a href="<?php the_permalink(); ?>">
-                                    <img class="img-fluid" src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/placeholder-tour.jpg" alt="<?php the_title_attribute(); ?>">
-                                </a>
-                            <?php endif; ?>
-                            <div class="tour-overlay p-4">
-                                <span class="tour-price"><?php echo bike_theme_format_price($price); ?>
-                                    <?php if ($flexible_pricing) : ?>
-                                        <small><?php esc_html_e('from', 'bike-theme'); ?></small>
-                                    <?php endif; ?>
-                                </span>
-                                <div class="tour-meta">
-                                    <?php if ($difficulty) : ?>
-                                    <span><i class="fa fa-chart-line me-2"></i><?php echo esc_html($difficulty); ?></span>
-                                    <?php endif; ?>
-                                    <?php if ($duration) : ?>
-                                    <span><i class="fa fa-clock me-2"></i><?php echo esc_html($duration); ?></span>
-                                    <?php endif; ?>
-                                </div>
+                    <div class="destination-folder">
+                        <div class="folder-header">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder-open text-primary"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4 class="folder-title"><?php echo esc_html($destination->name); ?></h4>
+                                <span class="tour-count"><?php printf(esc_html(_n('%s Tour', '%s Tours', $tours_count, 'bike-theme')), number_format_i18n($tours_count)); ?></span>
                             </div>
                         </div>
-                        <div class="p-4 mt-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h5 class="mb-0"><a href="<?php the_permalink(); ?>" class="text-dark"><?php the_title(); ?></a></h5>
+                        <div class="folder-content">
+                            <div class="folder-image">
+                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($destination->name); ?>" class="img-fluid rounded">
                             </div>
-                            <div class="d-flex mb-3">
-                                <?php if ($distance) : ?>
-                                <small class="border-end me-3 pe-3"><i class="fa fa-road text-primary me-2"></i><?php echo esc_html($distance); ?></small>
-                                <?php endif; ?>
-                                <?php 
-                                $categories = get_the_terms(get_the_ID(), 'tour_category');
-                                if ($categories && !is_wp_error($categories)) : 
-                                    $category = reset($categories); // Get first category
-                                ?>
-                                <small><i class="fa fa-tag text-primary me-2"></i><?php echo esc_html($category->name); ?></small>
+                            <div class="folder-categories">
+                                <?php if (!empty($category_counts)) : ?>
+                                    <?php foreach ($category_counts as $cat_id => $data) : ?>
+                                        <div class="category-badge">
+                                            <span class="badge bg-primary">
+                                                <?php echo esc_html($data['category']->name); ?>
+                                                <span class="count">(<?php echo esc_html($data['count']); ?>)</span>
+                                            </span>
+                                        </div>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <a class="btn btn-sm btn-primary rounded py-2 px-4" href="<?php the_permalink(); ?>"><?php esc_html_e('View Details', 'bike-theme'); ?></a>
-                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="<?php the_permalink(); ?>#book-now"><?php esc_html_e('Book Bike Tour', 'bike-theme'); ?></a>
+                            <div class="folder-description">
+                                <?php echo wp_trim_words($destination->description, 20, '...'); ?>
+                            </div>
+                            <div class="folder-actions">
+                                <a href="<?php echo esc_url(get_term_link($destination)); ?>" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye me-2"></i><?php esc_html_e('View Tours', 'bike-theme'); ?>
+                                </a>
+                                <a href="<?php echo esc_url(get_term_link($destination)); ?>#book-now" class="btn btn-sm btn-dark">
+                                    <i class="fas fa-calendar-alt me-2"></i><?php esc_html_e('Book Now', 'bike-theme'); ?>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <?php
-                endwhile;
-                wp_reset_postdata();
-            else :
+                    endforeach;
+                endif;
                 ?>
-                <div class="col-12 text-center">
-                    <h3><?php esc_html_e('No bike tours found.', 'bike-theme'); ?></h3>
-                    <p><?php esc_html_e('Please try different filter options or check back later.', 'bike-theme'); ?></p>
-                </div>
-                <?php
-            endif;
-            ?>
             </div>
+            <!-- Destinations Grid End -->
 
-            <!-- Pagination -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <nav aria-label="Page navigation">
-                        <?php
-        $big = 999999999; // Need an unlikely integer
-echo paginate_links(array(
-    'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-    'format' => '?paged=%#%',
-    'current' => max(1, get_query_var('paged')),
-    'total' => $tour_query->max_num_pages,
-    'prev_text' => '<i class="fa fa-angle-left"></i>',
-    'next_text' => '<i class="fa fa-angle-right"></i>',
-    'type' => 'list',
-    'end_size' => 3,
-    'mid_size' => 3
-));
-?>
-                    </nav>
-                </div>
-            </div>
-        </div>
+            <style>
+                .destination-folder {
+                    background: #fff;
+                    border-radius: 15px;
+                    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                    transition: all 0.3s ease;
+                    overflow: hidden;
+                    height: 100%;
+                }
+
+                .destination-folder:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+                }
+
+                .folder-header {
+                    display: flex;
+                    align-items: center;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    border-bottom: 1px solid #eee;
+                }
+
+                .folder-icon {
+                    font-size: 24px;
+                    margin-right: 15px;
+                }
+
+                .folder-info {
+                    flex: 1;
+                }
+
+                .folder-title {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                .tour-count {
+                    font-size: 14px;
+                    color: #6c757d;
+                }
+
+                .folder-content {
+                    padding: 20px;
+                }
+
+                .folder-image {
+                    margin-bottom: 15px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                .folder-image img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+
+                .folder-categories {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    margin-bottom: 15px;
+                }
+
+                .category-badge .badge {
+                    font-size: 12px;
+                    font-weight: 500;
+                    padding: 6px 12px;
+                }
+
+                .folder-description {
+                    font-size: 14px;
+                    color: #6c757d;
+                    margin-bottom: 15px;
+                    line-height: 1.5;
+                }
+
+                .folder-actions {
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .folder-actions .btn {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px 15px;
+                }
+
+                .folder-actions .btn i {
+                    font-size: 14px;
+                }
+
+                @media (max-width: 768px) {
+                    .folder-header {
+                        padding: 15px;
+                    }
+
+                    .folder-title {
+                        font-size: 16px;
+                    }
+
+                    .folder-image img {
+                        height: 150px;
+                    }
+                }
+            </style>
     </div>
     <!-- Tours End -->
-
-</main><!-- #main -->
+</main>
 
 <?php
 get_footer();

@@ -89,7 +89,7 @@ class Error_Log {
 			return;
 		}
 		?>
-		<div class="error-log-info" style="margin-top: 1rem;">
+		<div class="error-log-info" style="margin-top: 1.11rem;">
 			<code><?php echo esc_html( basename( $this->get_log_path() ) ); ?></code>
 			<em>(<?php echo esc_html( Str::human_number( strlen( join( '', $this->contents ) ) ) ); ?>)</em>
 		</div>

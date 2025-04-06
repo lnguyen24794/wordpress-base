@@ -57,7 +57,7 @@
 }
 
 .tour-basic-info h5 {
-    font-size: 1rem;
+    font-size: 1.11rem;
     margin-bottom: 0.25rem;
 }
 
@@ -70,7 +70,7 @@
     padding: 10px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .tour-header{
         text-align: center;
         min-height: 90vh;
@@ -94,7 +94,7 @@
     }
 
     .tour-tabs .nav-link{
-        font-size: 1rem;
+        font-size: 1.11rem !important;
     }
 }
 
@@ -135,7 +135,7 @@
 }
 
 .tour-overview p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.11rem;
 }
 
 .tour-overview img {
@@ -149,7 +149,7 @@
 .tour-overview h3, 
 .tour-overview h4 {
     margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.11rem;
 }
 
 /* Pricing Table Styles */
@@ -244,7 +244,7 @@
 .tour-tabs .nav-link{
     height: 100%;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.11rem;
 }
 
 /* Destinations styling */
@@ -286,4 +286,48 @@
     .destinations-section .destination-item {
         padding: 0.75rem !important;
     }
+}
+
+.glance {
+    padding-top: 40px;
+    padding-bottom: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #D0D2D3;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.glance > div.price {
+    background-image: url(assets/images/glance-price.svg) no-repeat;
+}
+
+.glance > div.duration {
+    background-image: url(assets/images/glance-duration.svg) no-repeat;
+}
+
+.glance > div.distance {
+    background-image: url(assets/images/glance-distance.svg) no-repeat;
+}
+
+.glance > div.difficulty {
+    background-image: url(assets/images/glance-difficulty.svg) no-repeat;
+}
+
+ .glance > div {
+    padding-top: 45px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    color: #231f20;
+    font-family: FFSuperGroteskWebProMedium;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 13px;
 }

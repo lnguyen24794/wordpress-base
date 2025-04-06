@@ -256,7 +256,7 @@ body {
 
 .akismet-awaiting-stats,
 .akismet-account {
-	padding: 0 1rem 1rem 1rem;
+	padding: 0 1.11rem 1.11rem 1.11rem;
 	margin: 0;
 }
 
@@ -368,7 +368,7 @@ body {
 
 .akismet-enter-api-key-box__key-input {
 	flex-grow: 1;
-	margin-left: 1rem;
+	margin-left: 1.11rem;
 }
 
 h3.akismet-enter-api-key-box__header {

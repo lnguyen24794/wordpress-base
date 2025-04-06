@@ -75,9 +75,10 @@ jQuery(document).ready(function($) {
     });
     
     // Counter for new slides
-    var slideCounter = $('.bike-slide-item').length;
+    var heroSlideCounter = $('#bike-slides-container .bike-slide-item').length;
+    var aboutSlideCounter = $('#bike-about-slides-container .bike-slide-item').length;
     
-    // Add new slide
+    // Add new hero slide
     $('#add-slide-button').on('click', function(e) {
         e.preventDefault();
         
@@ -86,8 +87,8 @@ jQuery(document).ready(function($) {
         
         // Replace the placeholders
         template = template
-            .replace(/{{index}}/g, slideCounter)
-            .replace(/{{number}}/g, slideCounter + 1);
+            .replace(/{{index}}/g, heroSlideCounter)
+            .replace(/{{number}}/g, heroSlideCounter + 1);
         
         // Add the new slide
         $('#bike-slides-container').append(template);
@@ -96,17 +97,39 @@ jQuery(document).ready(function($) {
         initializeMediaUploader($('#bike-slides-container .bike-slide-item').last());
         
         // Increment the counter
-        slideCounter++;
+        heroSlideCounter++;
+    });
+
+    // Add new about slide
+    $('#add-about-slide-button').on('click', function(e) {
+        e.preventDefault();
+        
+        // Get the template
+        var template = $('#about-slide-template').html();
+        
+        // Replace the placeholders
+        template = template
+            .replace(/{{index}}/g, aboutSlideCounter)
+            .replace(/{{number}}/g, aboutSlideCounter + 1);
+        
+        // Add the new slide
+        $('#bike-about-slides-container').append(template);
+        
+        // Initialize the media uploader for the new slide
+        initializeMediaUploader($('#bike-about-slides-container .bike-slide-item').last());
+        
+        // Increment the counter
+        aboutSlideCounter++;
     });
     
     // Toggle slide content
-    $('#bike-slides-container').on('click', '.slide-toggle', function(e) {
+    $('.bike-slide-item').on('click', '.slide-toggle', function(e) {
         e.preventDefault();
         $(this).closest('.bike-slide-item').find('.slide-content').slideToggle();
     });
     
     // Mark slide for removal
-    $('#bike-slides-container').on('click', '.slide-remove', function(e) {
+    $('.bike-slide-item').on('click', '.slide-remove', function(e) {
         e.preventDefault();
         
         if (confirm('Are you sure you want to remove this slide?')) {
@@ -186,11 +209,11 @@ jQuery(document).ready(function($) {
     
     // Optional: Add sortable functionality for slides
     if ($.fn.sortable) {
-        $('#bike-slides-container').sortable({
+        $('#bike-slides-container, #bike-about-slides-container').sortable({
             handle: 'h3',
             update: function(event, ui) {
                 // Update slide numbers after sorting
-                $('#bike-slides-container .bike-slide-item').each(function(index) {
+                $(this).find('.bike-slide-item').each(function(index) {
                     $(this).find('.slide-number').text(index + 1);
                 });
             }
