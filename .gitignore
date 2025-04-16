@@ -32,3 +32,4 @@ Thumbs.db
 .docker/
 .data/ 
 wp-content/themes/index.php
+wp-content/themes/
