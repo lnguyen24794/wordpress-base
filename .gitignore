@@ -33,3 +33,5 @@ Thumbs.db
 .data/ 
 wp-content/themes/index.php
 wp-content/themes/
+wp-content
+template

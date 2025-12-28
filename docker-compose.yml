@@ -6,6 +6,8 @@ services:
     image: mysql:8.0
     volumes:
       - db_data:/var/lib/mysql
+      - ./mysql.cnf:/etc/mysql/conf.d/custom.cnf
+      - ./init-root.sql:/docker-entrypoint-initdb.d/init-root.sql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
@@ -31,6 +33,42 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      # Debug Settings
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', true);
+        @ini_set('display_errors', 1);
+        define('SCRIPT_DEBUG', true);
+        define('SAVEQUERIES', true);
+    networks:
+      - wpsite
+
+
+  # WP-CLI
+  wpcli:
+    image: wordpress:cli
+    depends_on:
+      - db
+      - wordpress
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - wpsite
+
+  # Node.js for Build Tools
+  node:
+    image: node:18-alpine
+    working_dir: /app/wp-content/themes/anthome
+    volumes:
+      - ./:/app
+    command: tail -f /dev/null # Keep container running
     networks:
       - wpsite
 
@@ -42,9 +80,14 @@ services:
     restart: always
     ports:
       - '8081:80'
+    volumes:
+      - ./phpmyadmin.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: wordpress
       MYSQL_ROOT_PASSWORD: wordpress
+      UPLOAD_LIMIT: 150M
     networks:
       - wpsite
 
