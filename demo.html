@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why HT Plus - Offshore Development Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --text-dark: #1e293b;
+            --text-body: #334155;
+            --title-blue: #163057;
+            --title-yellow: #dca31f;
+            --border-blue: #bfe0f7;
+            --border-yellow: #eaddb6;
+            --bg-color: #fafbfd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle background decoration to mimic the image's faint shapes */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -10%;
+            width: 120%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(214, 232, 251, 0.4) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(246, 238, 203, 0.4) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header h1 {
+            color: var(--title-blue);
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header h2 {
+            color: var(--title-yellow);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-row {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 40px;
+            gap: 50px;
+            position: relative;
+        }
+
+        .section-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* Hexagon Image Container */
+        .hex-col {
+            flex: 0 0 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hexagon-outer {
+            width: 320px;
+            height: 360px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Shadows don't work well on clip-path directly without wrappers, so we just use border colors */
+        }
+        
+        .bg-blue { background: #88c4fc; }
+        .bg-yellow { background: #ecd077; }
+
+        .hexagon-inner {
+            width: 304px;
+            height: 344px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hexagon-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Text Content Box */
+        .text-col {
+            flex: 1;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .border-blue { border: 2px solid var(--border-blue); }
+        .border-yellow { border: 2px solid var(--border-yellow); }
+
+        .text-col h3 {
+            color: var(--title-blue);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .text-col ul {
+            list-style: none;
+        }
+
+        .text-col li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 16px;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .text-col li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--text-body);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section-row, .section-row.reverse {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            .hex-col {
+                flex: 0 0 auto;
+            }
+            .hexagon-outer {
+                width: 280px;
+                height: 315px;
+            }
+            .hexagon-inner {
+                width: 266px;
+                height: 301px;
+            }
+            .text-col {
+                width: 100%;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>For Companies Considering Offshore Development Services</h1>
+            <h2>WHY HT PLUS</h2>
+        </div>
+
+        <!-- Row 1 -->
+        <div class="section-row">
+            <div class="hex-col">
+                <div class="hexagon-outer bg-blue">
+                    <div class="hexagon-inner">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Team working">
+                    </div>
+                </div>
+            </div>
+            <div class="text-col border-blue">
+                <h3>Cost-Effective Development Model</h3>
+                <ul>
+                    <li>Our development activities are conducted almost entirely from our offshore delivery center in Vietnam, enabling us to provide significant cost advantages to our clients.</li>
+                    <li>Headquartered in Da Nang, we benefit from lower labor costs compared to major cities such as Hanoi and Ho Chi Minh City. In addition, Da Nang offers a stable talent pool, allowing us to maintain an employee turnover rate below 10%.</li>
+                    <li>This combination of cost efficiency and workforce stability helps ensure consistent project delivery and long-term knowledge retention.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="section-row reverse">
+            <div class="hex-col">
+                <div class="hexagon-outer bg-yellow">
+                    <div class="hexagon-inner">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Modern office">
+                    </div>
+                </div>
+            </div>
+            <div class="text-col border-yellow">
+                <h3>Proven Problem-Solving Expertise</h3>
+                <ul>
+                    <li>Our core team brings more than 10 years of experience delivering offshore development services for the Japanese market.</li>
+                    <li>Over the years, we have successfully addressed many of the challenges commonly associated with offshore development, including communication barriers, security concerns, and differences in business practices and working styles.</li>
+                    <li>By leveraging this experience, we proactively identify potential risks before project kickoff and implement appropriate preventive measures, ensuring smooth project execution and successful project outcomes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="section-row">
+            <div class="hex-col">
+                <div class="hexagon-outer bg-blue">
+                    <div class="hexagon-inner">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="People in meeting">
+                    </div>
+                </div>
+            </div>
+            <div class="text-col border-blue">
+                <h3>Japanese Quality, Global Delivery</h3>
+                <ul>
+                    <li>AI-driven development that accelerates delivery, reduces engineering effort, and lowers costs while maintaining high-quality outcomes.</li>
+                    <li>With over a decade of experience serving Japanese clients, we have built a culture of quality, precision, and accountability.</li>
+                    <li>Our project leadership team works closely with clients from discovery and consulting to delivery and post-launch support, ensuring clear communication, fast response, and a strong understanding of business goals.</li>
+                    <li>We bring this proven Japanese-quality mindset to clients across global English-speaking markets and beyond, delivering reliable, high-quality software solutions with confidence.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+ht_plus_offshore_page.html
+Displaying ht_plus_offshore_page.html.

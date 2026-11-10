@@ -3,7 +3,7 @@
 Môi trường phát triển WordPress sử dụng Docker.
 
 ## Thành phần
-- WordPress (phiên bản mới nhất)
+- WordPress 7.0
 - MySQL 8.0
 - phpMyAdmin
 
@@ -25,8 +25,8 @@ docker-compose up -d
 ```
 
 3. Truy cập vào các dịch vụ:
-   - WordPress: http://localhost:8000
-   - phpMyAdmin: http://localhost:8080 (username: root, password: wordpress)
+   - WordPress: http://localhost:8001
+   - phpMyAdmin: http://localhost:8081 (username: root, password: wordpress)
 
 ## Cấu trúc thư mục
 - `wp-content/`: Thư mục chứa themes, plugins và uploads của WordPress
